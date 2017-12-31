@@ -1,7 +1,6 @@
 let express = require('express')
 let multer = require('multer')
 
-
 let app = express()
 app.use(express.static(__dirname));
 
@@ -19,15 +18,13 @@ let upload = multer({storage: storage});
 
 app.post('/upload', function (req, res, next) {
   upload.single('file')(req, res, function (err) {
-
-    res.send('Got a POST request');
     if (err) {
       console.log('error', err);
       return;
     }
 
-    console.log(req.file);
     res.send(JSON.stringify(req.file));
+    console.log(req.file);
   });
 });
 
