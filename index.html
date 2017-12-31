@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="format-detection" content="telephone=no">
+  <title>Node.js upload</title>
+  <meta name="description" content="">
+</head>
+
+<body>
+  <form id="upload" method="POST" action="/upload" enctype="multipart/form-data">
+    <p>
+      <label for="file">File:</label>
+      <input type="file" name="file" required/>
+    </p>
+    <p>
+      <input type="submit" name="submit" value="Submit" />
+    </p>
+  </form>
+
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $('#upload').on('submit', function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+          type: 'POST',
+          url: '/upload',
+          data: formData,
+          contentType: false,
+          processData: false
+        }).done(function () {
+          alert('Done');
+          console.log('done');
+        }).fail(function (err) {
+          console.log(err);
+        })
+      });
+    });
+  </script>
+</body>
+
+</html>
